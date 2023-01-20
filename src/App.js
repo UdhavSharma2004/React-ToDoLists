@@ -6,9 +6,15 @@ import {HashRouter} from 'react-router-dom';
 function App() {
   return (
     <HashRouter>
-      <Header/>
-      <Main/>
-      <Footer/>
+          <header>
+              <Header/>
+          </header>
+          <main>
+              <Main/>
+          </main>
+          <footer>
+              <Footer/>
+          </footer>
     </HashRouter>
   );
 }
