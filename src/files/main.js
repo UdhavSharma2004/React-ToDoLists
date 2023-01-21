@@ -12,19 +12,19 @@ import API from './APIhandling';
         5-> .FaEdit for Edit box and triggers handleEdit(item.id) onClick 
         6-> .FaTrashAlt for delete box and triggers { handleDone(item.id) and handleDelete(item.id) } onClick
         */
-       
-       //global variables
-       const url = "https://json-server-api-fomg.onrender.com/items";
+
+//global variables
+const url = "https://json-server-api-fomg.onrender.com/items";
 const Main = () => {
-           // useState Hooks declarations
-           const [list, setList] = useState([]);
-           const [count, setCount] = useState(list.length + 1);
-           const [alldata, setAllData] = useState([]);
-           
-           
-           // data dealing with json-server
-           
-// **********************************************************
+    // useState Hooks declarations
+    const [list, setList] = useState([]);
+    const [count, setCount] = useState(list.length + 1);
+    const [alldata, setAllData] = useState([]);
+
+
+    // data dealing with json-server
+
+    // **********************************************************
     //GET requests from server
     async function GET() {
         let response = await fetch(url);
@@ -87,7 +87,7 @@ const Main = () => {
             })
         };
     }
-    async function PATCH(id,checkStat) {
+    async function PATCH(id, checkStat) {
         let path = `${url}/${id}`
         console.log("Trying to PATCH-", path);
         Patchsettings(checkStat);
@@ -96,7 +96,7 @@ const Main = () => {
             console.log(result);
         }
     }
-// **********************************************************
+    // **********************************************************
 
 
     //Functionalities of buttons and Displaying results
@@ -184,7 +184,7 @@ const Main = () => {
             }
         });
         setList(newList);
-        PATCH(id,checkStat);
+        PATCH(id, checkStat);
     }
 
 
@@ -205,12 +205,12 @@ const Main = () => {
     }
 
 
-// **********************************************************
+    // **********************************************************
     return (
         <div className="mainContent">
             <div className="content">
                 <label name="Search" className="SearchBar">
-                    <input type="text" id="search" placeholder="Search Tasks" name="Search" onChange={(e) => { handleSearch(e) }} onKeyDown={(e)=>{
+                    <input type="text" id="search" placeholder="Search Tasks" name="Search" onChange={(e) => { handleSearch(e) }} onKeyDown={(e) => {
                         if (e.key === "Backspace") {
                             handleSearch(true);
                         }
