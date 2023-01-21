@@ -79,6 +79,31 @@ const Main = () => {
         }
     }
 
+
+
+    //update/PATCH
+    let PatchSettings;
+    function Patchsettings(checkStat){
+        PatchSettings = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        body: JSON.stringify({
+            checked:checkStat
+        })
+        };
+    }
+    async function PATCH(id){
+    let path=`${url}/${id}`
+    console.log("Trying to PATCH-",path);
+    Patchsettings();
+    let result=await API(path,PatchSettings);
+    if(result){
+        console.log(result);
+        }
+    }
+
     //Functionalities of buttons and Displaying results
     
     // to add new task or submit button handling
@@ -150,15 +175,6 @@ const Main = () => {
 
     // to mark done a list item when checked with given id
     function handleDone(id) {
-        // let newList=list;
-        // console.log(newList);
-        // for(let i=0;i<newList.length;i++){
-        //     if(newList[i].id===id){
-        //         newList[i].checked=true;
-        //         console.log("toggled");
-        //     }
-        // }
-        // console.log(newList);
         let checkStat;
         const newList = list.map((item) =>{
             if(id === item.id){
@@ -170,28 +186,7 @@ const Main = () => {
             }
         });
         setList(newList);
-        let path=`${url}/${id}`
-        let PatchSettings;
-        function Patchsettings(newObj){
-            PatchSettings = {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            body: JSON.stringify({
-                checked:checkStat
-            })
-            };
-        }
-        async function PATCH(){
-        console.log("Trying to PATCH-",path);
-        Patchsettings();
-        let result=await API(path,PatchSettings);
-        if(result){
-            console.log(result);
-            }
-        }
-        PATCH();
+        PATCH(id);
     }
 
 
