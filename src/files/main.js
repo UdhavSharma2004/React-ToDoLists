@@ -150,7 +150,25 @@ const Main = () => {
 
     // to mark done a list item when checked with given id
     function handleDone(id) {
-        const newList = list.map((item) => (id === item.id) ? ({ ...item, checked: !item.checked }) : item);
+        // let newList=list;
+        // console.log(newList);
+        // for(let i=0;i<newList.length;i++){
+        //     if(newList[i].id===id){
+        //         newList[i].checked=true;
+        //         console.log("toggled");
+        //     }
+        // }
+        // console.log(newList);
+        let checkStat;
+        const newList = list.map((item) =>{
+            if(id === item.id){
+                checkStat=!item.checked;
+                return({ ...item, checked: !item.checked })
+            }
+            else{
+                return item
+            }
+        });
         setList(newList);
         let path=`${url}/${id}`
         let PatchSettings;
@@ -160,16 +178,20 @@ const Main = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-            body: JSON.stringify({checked:!(newObj.checked)})
+            body: JSON.stringify({
+                checked:checkStat
+            })
             };
         }
         async function PATCH(){
         console.log("Trying to PATCH-",path);
-        let result=await API(path,Patchsettings);
+        Patchsettings();
+        let result=await API(path,PatchSettings);
         if(result){
             console.log(result);
             }
         }
+        PATCH();
     }
 
 
@@ -211,7 +233,7 @@ const Main = () => {
                                 return (
                                     <li className="listItems">
                                         <label className="tickBox">
-                                            <input type="checkbox" className="checkbox" onChange={() => handleDone(item.id)}></input>
+                                            <input type="checkbox" className="checkbox" checked={(item.checked)} onChange={() => handleDone(item.id)}></input>
                                             <span className="listItem-value" style={(item.checked) ? { textDecoration: "line-through" } : {}}>{item.value}</span>
                                         </label>
                                         <div className="sidebox">
