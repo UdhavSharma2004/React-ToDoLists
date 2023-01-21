@@ -4,6 +4,11 @@
       "id": 1,
       "value": "Sample Task 1",
       "checked": false
+    },
+    {
+      "id": 2,
+      "value": "Sample Task 2",
+      "checked": false
     }
   ]
 }
